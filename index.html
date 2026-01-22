@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 网页标题图标 -->
+    <link rel="icon" href="https://i1.hdslb.com/bfs/face/133676e2c2ede3f7dfa0cf087daa6f41049815cf.jpg" type="image/jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新空的小窝 - 个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fef7fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* 主卡片容器 */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 55px 35px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 12px 32px rgba(251, 114, 153, 0.12);
+            text-align: center;
+            border: 1px solid rgba(251, 114, 153, 0.08);
+        }
+
+        /* 标题样式（保证一行显示） */
+        .main-title {
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .sub-title {
+            color: #718096;
+            font-size: 1.15rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* 联系方式按钮列表 */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        /* 通用按钮样式 */
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 按钮高光效果 */
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        /* 平台专属配色 */
+        .bilibili-btn {
+            background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%);
+        }
+
+        .github-btn {
+            background: linear-gradient(90deg, #2d333b 0%, #484f58 100%);
+        }
+
+        /* 纯文本信息样式 */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 16px;
+            background: #f8f9fa;
+            color: #4a5568;
+            font-size: 1.1rem;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* 图标统一样式 */
+        .btn-icon, .info-icon {
+            font-size: 1.4rem;
+        }
+
+        /* 悬停效果 */
+        .contact-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .bilibili-btn:hover {
+            background: linear-gradient(90deg, #fa5882 0%, #fb889e 100%);
+        }
+
+        .github-btn:hover {
+            background: linear-gradient(90deg, #22272e 0%, #3c4148 100%);
+        }
+
+        /* 网易云音乐播放器容器 */
+        .music-player {
+            margin: 20px auto 0;
+            display: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 330px;
+            max-width: 100%;
+        }
+
+        /* 音乐开关按钮（固定右下角） */
+        .music-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #fb7299;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(251, 114, 153, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+            /* 提示文字相关 */
+            position: relative;
+        }
+
+        /* 悬浮提示样式 */
+        .music-toggle::after {
+            content: '点我播放随机音乐~';
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* 鼠标悬浮时显示提示 */
+        .music-toggle:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: #fa5882;
+        }
+
+        /* 适配小屏幕 */
+        @media (max-width: 400px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+            .contact-btn, .contact-info {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            .music-player {
+                width: 100%;
+            }
+            .music-player iframe {
+                width: 100% !important;
+                height: 86px !important;
+            }
+            /* 小屏幕下提示文字调整位置 */
+            .music-toggle::after {
+                bottom: 60px;
+                right: 0;
+                transform: translateX(0);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="card">
+    <h1 class="main-title">欢迎来到 新空的小窝</h1>
+    <p class="sub-title">新空awa 的个人主页</p>
+
+    <div class="contact-buttons">
+        <!-- B站按钮 -->
+        <a href="https://space.bilibili.com/454325752" target="_blank" class="contact-btn bilibili-btn">
+            <i class="fab fa-bilibili btn-icon"></i>
+            <span>是新空啊</span>
+        </a>
+
+        <!-- GitHub按钮 -->
+        <a href="https://github.com/FurryXinkong" target="_blank" class="contact-btn github-btn">
+            <i class="fab fa-github btn-icon"></i>
+            <span>FurryXinkong</span>
+        </a>
+
+        <!-- QQ信息 -->
+        <div class="contact-info">
+            <i class="fab fa-qq info-icon" style="color: #12b7f5;"></i>
+            <span>226355502</span>
+        </div>
+
+        <!-- 邮箱信息 -->
+        <div class="contact-info">
+            <i class="fas fa-envelope info-icon" style="color: #ea4335;"></i>
+            <span>xinkong@cnfurry.asia</span>
+        </div>
+    </div>
+
+    <!-- 网易云音乐播放器（默认隐藏） -->
+    <div class="music-player" id="musicPlayer"></div>
+</div>
+
+<!-- 音乐开关按钮 -->
+<button class="music-toggle" id="musicToggle">
+    <i class="fas fa-music"></i>
+</button>
+
+<script>
+    // 网易云音乐播放器列表（修复URL协议问题）
+    const musicIframes = [
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1889841687&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2019279516&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747885251&auto=1&height=66"></iframe>'
+    ];
+
+    // 获取元素
+    const musicPlayer = document.getElementById('musicPlayer');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+    let currentIframe = null;
+
+    // 随机选择并加载播放器
+    function loadRandomPlayer() {
+        // 移除现有播放器
+        if (currentIframe) {
+            musicPlayer.innerHTML = '';
+            currentIframe = null;
+        }
+        // 随机选择一个播放器
+        const randomIndex = Math.floor(Math.random() * musicIframes.length);
+        currentIframe = musicIframes[randomIndex];
+        musicPlayer.innerHTML = currentIframe;
+    }
+
+    // 初始化加载（不显示）
+    loadRandomPlayer();
+
+    // 开关按钮点击事件
+    musicToggle.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+            musicPlayer.style.display = 'block';
+            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            // 重新加载确保播放
+            loadRandomPlayer();
+            // 暂停时修改提示文字
+            musicToggle.setAttribute('data-status', 'playing');
+        } else {
+            musicPlayer.style.display = 'none';
+            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            // 播放时恢复提示文字
+            musicToggle.setAttribute('data-status', 'paused');
+        }
+    });
+</script>
+</body>
+</html>
