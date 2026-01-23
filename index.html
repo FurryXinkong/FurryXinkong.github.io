@@ -5,7 +5,7 @@
     <link rel="icon" href="https://i1.hdslb.com/bfs/face/133676e2c2ede3f7dfa0cf087daa6f41049815cf.jpg" type="image/jpeg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新空的小窝 - 个人主页</title>
+    <title>新空的小窝</title>
     <style>
         * {
             margin: 0;
@@ -19,8 +19,9 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            /* 移除固定居中，适配滚动 */
+            align-items: flex-start;
+            padding: 40px 20px;
             position: relative;
         }
 
@@ -34,6 +35,8 @@
             box-shadow: 0 12px 32px rgba(251, 114, 153, 0.12);
             text-align: center;
             border: 1px solid rgba(251, 114, 153, 0.08);
+            /* 增加内边距适配新增内容 */
+            padding-bottom: 40px;
         }
 
         /* 标题样式（保证一行显示） */
@@ -77,6 +80,15 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+        }
+
+        /* 个人简介按钮专属样式 */
+        .intro-btn {
+            background: linear-gradient(90deg, #7474bf 0%, #348ac7 100%);
+        }
+
+        .intro-btn:hover {
+            background: linear-gradient(90deg, #6262b9 0%, #2d7cb8 100%);
         }
 
         /* 按钮高光效果 */
@@ -201,6 +213,32 @@
             background: #fa5882;
         }
 
+        /* 个人简介板块样式 */
+        .intro-section {
+            margin-top: 40px;
+            padding: 25px 20px;
+            border-radius: 20px;
+            background: #fef7fb;
+            border: 1px solid rgba(251, 114, 153, 0.1);
+            text-align: left;
+            /* 锚点定位偏移，避免被顶部遮挡 */
+            scroll-margin-top: 20px;
+        }
+
+        .intro-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .intro-content {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
         /* 适配小屏幕 */
         @media (max-width: 400px) {
             .main-title {
@@ -222,6 +260,12 @@
                 bottom: 60px;
                 right: 0;
                 transform: translateX(0);
+            }
+            .intro-title {
+                font-size: 1.5rem;
+            }
+            .intro-content {
+                font-size: 1rem;
             }
         }
     </style>
@@ -245,6 +289,12 @@
             <span>FurryXinkong</span>
         </a>
 
+        <!-- 个人简介按钮 -->
+        <button class="contact-btn intro-btn" id="introBtn">
+            <i class="fas fa-user-circle btn-icon"></i>
+            <span>个人简介</span>
+        </button>
+
         <!-- QQ信息 -->
         <div class="contact-info">
             <i class="fab fa-qq info-icon" style="color: #12b7f5;"></i>
@@ -260,6 +310,15 @@
 
     <!-- 网易云音乐播放器（默认隐藏） -->
     <div class="music-player" id="musicPlayer"></div>
+
+    <!-- 个人简介板块 -->
+    <div class="intro-section" id="introSection">
+        <h2 class="intro-title">个人简介</h2>
+        <div class="intro-content">
+            你好哦 咱是新空 来自淮海地区
+            未完待续
+        </div>
+    </div>
 </div>
 
 <!-- 音乐开关按钮 -->
@@ -268,17 +327,22 @@
 </button>
 
 <script>
-    // 网易云音乐播放器列表（修复URL协议问题）
+    // 网易云音乐播放器列表（新增3首，修复URL协议问题）
     const musicIframes = [
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1889841687&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2019279516&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747885251&auto=1&height=66"></iframe>'
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747885251&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=3317243342&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747802379&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1469011532&auto=1&height=66"></iframe>'
     ];
 
     // 获取元素
     const musicPlayer = document.getElementById('musicPlayer');
     const musicToggle = document.getElementById('musicToggle');
+    const introBtn = document.getElementById('introBtn');
+    const introSection = document.getElementById('introSection');
     let isPlaying = false;
     let currentIframe = null;
 
@@ -298,7 +362,7 @@
     // 初始化加载（不显示）
     loadRandomPlayer();
 
-    // 开关按钮点击事件
+    // 音乐开关按钮点击事件
     musicToggle.addEventListener('click', () => {
         isPlaying = !isPlaying;
         if (isPlaying) {
@@ -314,6 +378,14 @@
             // 播放时恢复提示文字
             musicToggle.setAttribute('data-status', 'paused');
         }
+    });
+
+    // 个人简介按钮点击事件 - 平滑滚动到简介板块
+    introBtn.addEventListener('click', () => {
+        introSection.scrollIntoView({
+            behavior: 'smooth', // 平滑滚动
+            block: 'start'      // 对齐到顶部
+        });
     });
 </script>
 </body>
