@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 网页标题图标 -->
     <link rel="icon" href="https://i1.hdslb.com/bfs/face/133676e2c2ede3f7dfa0cf087daa6f41049815cf.jpg" type="image/jpeg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +18,12 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            /* 移除固定居中，适配滚动 */
             align-items: flex-start;
             padding: 40px 20px;
             position: relative;
         }
 
-        /* 主卡片容器 */
-        .card {
+       .card {
             background: #ffffff;
             border-radius: 24px;
             padding: 55px 35px;
@@ -35,12 +32,10 @@
             box-shadow: 0 12px 32px rgba(251, 114, 153, 0.12);
             text-align: center;
             border: 1px solid rgba(251, 114, 153, 0.08);
-            /* 增加内边距适配新增内容 */
             padding-bottom: 40px;
         }
 
-        /* 标题样式（保证一行显示） */
-        .main-title {
+       .main-title {
             font-size: 2.2rem;
             color: #2d3748;
             margin-bottom: 12px;
@@ -48,23 +43,21 @@
             white-space: nowrap;
         }
 
-        .sub-title {
+       .sub-title {
             color: #718096;
             font-size: 1.15rem;
             margin-bottom: 30px;
             font-weight: 400;
         }
 
-        /* 联系方式按钮列表 */
-        .contact-buttons {
+       .contact-buttons {
             display: flex;
             flex-direction: column;
             gap: 18px;
             margin-bottom: 25px;
         }
 
-        /* 通用按钮样式 */
-        .contact-btn {
+       .contact-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -82,17 +75,15 @@
             overflow: hidden;
         }
 
-        /* 个人简介按钮专属样式 */
-        .intro-btn {
+       .intro-btn {
             background: linear-gradient(90deg, #7474bf 0%, #348ac7 100%);
         }
 
-        .intro-btn:hover {
+       .intro-btn:hover {
             background: linear-gradient(90deg, #6262b9 0%, #2d7cb8 100%);
         }
 
-        /* 按钮高光效果 */
-        .contact-btn::before {
+       .contact-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -103,21 +94,19 @@
             transition: left 0.6s ease;
         }
 
-        .contact-btn:hover::before {
+       .contact-btn:hover::before {
             left: 100%;
         }
 
-        /* 平台专属配色 */
-        .bilibili-btn {
+       .bilibili-btn {
             background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%);
         }
 
-        .github-btn {
+       .github-btn {
             background: linear-gradient(90deg, #2d333b 0%, #484f58 100%);
         }
 
-        /* 纯文本信息样式 */
-        .contact-info {
+       .contact-info {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -128,29 +117,57 @@
             color: #4a5568;
             font-size: 1.1rem;
             border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* 图标统一样式 */
-        .btn-icon, .info-icon {
+       .contact-info:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            background: #fff;
+            border-color: rgba(251, 114, 153, 0.2);
+        }
+
+       .contact-info::after {
+            content: '复制成功 ✔';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #4CAF50;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 0 16px 0 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+       .contact-info.copied::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+       .btn-icon,.info-icon {
             font-size: 1.4rem;
         }
 
-        /* 悬停效果 */
-        .contact-btn:hover {
+       .contact-btn:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
         }
 
-        .bilibili-btn:hover {
+       .bilibili-btn:hover {
             background: linear-gradient(90deg, #fa5882 0%, #fb889e 100%);
         }
 
-        .github-btn:hover {
+       .github-btn:hover {
             background: linear-gradient(90deg, #22272e 0%, #3c4148 100%);
         }
 
-        /* 网易云音乐播放器容器 */
-        .music-player {
+       .music-player {
             margin: 20px auto 0;
             display: none;
             border-radius: 12px;
@@ -160,8 +177,7 @@
             max-width: 100%;
         }
 
-        /* 音乐开关按钮（固定右下角） */
-        .music-toggle {
+       .music-toggle {
             position: fixed;
             right: 20px;
             bottom: 20px;
@@ -179,12 +195,9 @@
             box-shadow: 0 4px 12px rgba(251, 114, 153, 0.3);
             transition: all 0.3s ease;
             z-index: 999;
-            /* 提示文字相关 */
-            position: relative;
         }
 
-        /* 悬浮提示样式 */
-        .music-toggle::after {
+       .music-toggle::after {
             content: '点我播放随机音乐~';
             position: absolute;
             right: 60px;
@@ -202,69 +215,161 @@
             pointer-events: none;
         }
 
-        /* 鼠标悬浮时显示提示 */
-        .music-toggle:hover::after {
+       .music-toggle:hover::after {
             opacity: 1;
             visibility: visible;
         }
 
-        .music-toggle:hover {
+       .music-toggle:hover {
             transform: scale(1.1);
             background: #fa5882;
         }
 
-        /* 个人简介板块样式 */
-        .intro-section {
+       .intro-section {
             margin-top: 40px;
             padding: 25px 20px;
             border-radius: 20px;
             background: #fef7fb;
             border: 1px solid rgba(251, 114, 153, 0.1);
             text-align: left;
-            /* 锚点定位偏移，避免被顶部遮挡 */
             scroll-margin-top: 20px;
         }
 
-        .intro-title {
+       .intro-title {
             font-size: 1.8rem;
             color: #2d3748;
             margin-bottom: 15px;
             text-align: center;
         }
 
-        .intro-content {
+       .intro-content {
             font-size: 1.15rem;
             color: #4a5568;
             line-height: 1.8;
             white-space: pre-line;
         }
 
-        /* 适配小屏幕 */
+       .image-toggle {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #7474bf;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(116, 116, 191, 0.3);
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+       .image-toggle::after {
+            content: '点我开自己户籍~';
+            position: absolute;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+       .image-toggle:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+       .image-toggle:hover {
+            transform: scale(1.1);
+            background: #6262b9;
+        }
+
+       .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+       .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+       .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fb7299;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+       .close-modal:hover {
+            background: #fa5882;
+            transform: scale(1.1);
+        }
+
         @media (max-width: 400px) {
-            .main-title {
+           .main-title {
                 font-size: 1.8rem;
             }
-            .contact-btn, .contact-info {
+           .contact-btn,.contact-info {
                 padding: 14px 20px;
                 font-size: 1rem;
             }
-            .music-player {
+           .music-player {
                 width: 100%;
             }
-            .music-player iframe {
-                width: 100% !important;
-                height: 86px !important;
+           .music-player iframe {
+                width: 100%!important;
+                height: 86px!important;
             }
-            /* 小屏幕下提示文字调整位置 */
-            .music-toggle::after {
+           .music-toggle::after {
                 bottom: 60px;
                 right: 0;
                 transform: translateX(0);
             }
-            .intro-title {
+           .image-toggle::after {
+                bottom: 60px;
+                left: 0;
+                transform: translateX(0);
+            }
+           .intro-title {
                 font-size: 1.5rem;
             }
-            .intro-content {
+           .intro-content {
                 font-size: 1rem;
             }
         }
@@ -277,56 +382,58 @@
     <p class="sub-title">新空awa 的个人主页</p>
 
     <div class="contact-buttons">
-        <!-- B站按钮 -->
         <a href="https://space.bilibili.com/454325752" target="_blank" class="contact-btn bilibili-btn">
             <i class="fab fa-bilibili btn-icon"></i>
             <span>是新空啊</span>
         </a>
 
-        <!-- GitHub按钮 -->
         <a href="https://github.com/FurryXinkong" target="_blank" class="contact-btn github-btn">
             <i class="fab fa-github btn-icon"></i>
             <span>FurryXinkong</span>
         </a>
 
-        <!-- 个人简介按钮 -->
         <button class="contact-btn intro-btn" id="introBtn">
             <i class="fas fa-user-circle btn-icon"></i>
             <span>个人简介</span>
         </button>
 
-        <!-- QQ信息 -->
-        <div class="contact-info">
+        <div class="contact-info" data-copy="226355502">
             <i class="fab fa-qq info-icon" style="color: #12b7f5;"></i>
             <span>226355502</span>
         </div>
 
-        <!-- 邮箱信息 -->
-        <div class="contact-info">
+        <div class="contact-info" data-copy="xinkong@cnfurry.asia">
             <i class="fas fa-envelope info-icon" style="color: #ea4335;"></i>
             <span>xinkong@cnfurry.asia</span>
         </div>
     </div>
 
-    <!-- 网易云音乐播放器（默认隐藏） -->
     <div class="music-player" id="musicPlayer"></div>
 
-    <!-- 个人简介板块 -->
     <div class="intro-section" id="introSection">
         <h2 class="intro-title">个人简介</h2>
-        <div class="intro-content">
-            你好哦 咱是新空 来自淮海地区
-        </div>
+        <div class="intro-content">你好哦 咱是新空 来自淮海地区
+            咱喜欢玩 三角洲 CS2 黎明杀机 猛兽派对 APEX 求生之路
+            欢迎大家扩列哦xwx</div>
     </div>
 </div>
 
-<!-- 音乐开关按钮 -->
 <button class="music-toggle" id="musicToggle">
     <i class="fas fa-music"></i>
 </button>
 
+<button class="image-toggle" id="imageToggle">
+    <i class="fas fa-image"></i>
+</button>
+
+<div class="image-modal" id="imageModal">
+    <button class="close-modal" id="closeModal">
+        <i class="fas fa-times"></i>
+    </button>
+    <img src="" alt="随机图片" class="image-modal-content" id="modalImage">
+</div>
+
 <script>
-    // 网易云音乐播放器列表（新增3首，修复URL协议问题）
     const musicIframes = [
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1889841687&auto=1&height=66"></iframe>',
@@ -334,10 +441,12 @@
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747885251&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=3317243342&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747802379&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1469011532&auto=1&height=66"></iframe>'
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1469011532&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1827600686&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2712468512&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1981180229&auto=1&height=66"></iframe>'
     ];
 
-    // 获取元素
     const musicPlayer = document.getElementById('musicPlayer');
     const musicToggle = document.getElementById('musicToggle');
     const introBtn = document.getElementById('introBtn');
@@ -345,48 +454,100 @@
     let isPlaying = false;
     let currentIframe = null;
 
-    // 随机选择并加载播放器
     function loadRandomPlayer() {
-        // 移除现有播放器
         if (currentIframe) {
             musicPlayer.innerHTML = '';
             currentIframe = null;
         }
-        // 随机选择一个播放器
         const randomIndex = Math.floor(Math.random() * musicIframes.length);
         currentIframe = musicIframes[randomIndex];
         musicPlayer.innerHTML = currentIframe;
     }
 
-    // 初始化加载（不显示）
     loadRandomPlayer();
 
-    // 音乐开关按钮点击事件
     musicToggle.addEventListener('click', () => {
-        isPlaying = !isPlaying;
         if (isPlaying) {
-            musicPlayer.style.display = 'block';
-            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-            // 重新加载确保播放
-            loadRandomPlayer();
-            // 暂停时修改提示文字
-            musicToggle.setAttribute('data-status', 'playing');
-        } else {
             musicPlayer.style.display = 'none';
+            const iframe = musicPlayer.querySelector('iframe');
+            if (iframe) {
+                const src = iframe.src;
+                const parts = src.split('&');
+                const newParts = [];
+                for (const part of parts) {
+                    if (!part.startsWith('auto=')) {
+                        newParts.push(part);
+                    }
+                }
+                newParts.push('auto=0');
+                iframe.src = newParts.join('&');
+            }
             musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-            // 播放时恢复提示文字
             musicToggle.setAttribute('data-status', 'paused');
+        } else {
+            musicPlayer.style.display = 'block';
+            loadRandomPlayer();
+            const iframe = musicPlayer.querySelector('iframe');
+            if (iframe) {
+                const src = iframe.src;
+                const parts = src.split('&');
+                const newParts = [];
+                for (const part of parts) {
+                    if (!part.startsWith('auto=')) {
+                        newParts.push(part);
+                    }
+                }
+                newParts.push('auto=1');
+                iframe.src = newParts.join('&');
+            }
+            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            musicToggle.setAttribute('data-status', 'playing');
         }
+        isPlaying =!isPlaying;
     });
 
-    // 个人简介按钮点击事件 - 平滑滚动到简介板块
     introBtn.addEventListener('click', () => {
         introSection.scrollIntoView({
-            behavior: 'smooth', // 平滑滚动
-            block: 'start'      // 对齐到顶部
+            behavior:'smooth',
+            block:'start'
         });
+    });
+
+    const copyElements = document.querySelectorAll('.contact-info[data-copy]');
+    copyElements.forEach(element => {
+        element.addEventListener('click', () => {
+            const copyText = element.getAttribute('data-copy');
+            navigator.clipboard.writeText(copyText).then(() => {
+                element.classList.add('copied');
+                setTimeout(() => {
+                    element.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动复制！');
+            });
+        });
+    });
+
+    const imageToggle = document.getElementById('imageToggle');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    imageToggle.addEventListener('click', () => {
+        modalImage.src = `https://imgapi.cn/ip.php?t=${new Date().getTime()}`;
+        imageModal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', () => {
+        imageModal.style.display = 'none';
+    });
+
+    imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            imageModal.style.display = 'none';
+        }
     });
 </script>
 </body>
 </html>
-
