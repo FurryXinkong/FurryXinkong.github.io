@@ -16,285 +16,404 @@
         body {
             background: linear-gradient(135deg, #fdf2f8 0%, #fef7fb 100%);
             min-height: 100vh;
+            padding: 30px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            padding: 40px 20px;
+            align-items: center;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2.895 2-2 2zm-63 40c1.105 0 2-.895 2-2s-.895-2-2-2-2.895 2-2 2z' fill='%23fb7299' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+       .nest-panel {
+            display: flex;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 12px 32px rgba(251, 114, 153, 0.08);
+            max-width: 1000px;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+            border: 1px solid rgba(251, 114, 153, 0.08);
+            transform: translateY(-2px);
+            transition: transform 0.3s ease;
+        }
+
+       .nest-panel:hover {
+            transform: translateY(0);
+        }
+
+       .sidebar {
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(180deg, #fef7fb 0%, #fdf2f8 100%);
+            padding: 40px 0;
+            border-right: 1px solid rgba(251, 114, 153, 0.08);
+            display: flex;
+            flex-direction: column;
             position: relative;
         }
 
-       .card {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 55px 35px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 12px 32px rgba(251, 114, 153, 0.12);
-            text-align: center;
-            border: 1px solid rgba(251, 114, 153, 0.08);
-            padding-bottom: 40px;
+       .nav-highlight {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            width: calc(100% - 30px);
+            height: 70px;
+            background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%);
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(251, 114, 153, 0.2);
+            transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 1;
         }
 
-       .main-title {
+       .panel-title {
+            text-align: center;
+            padding: 0 25px 30px;
+            border-bottom: 1px solid rgba(251, 114, 153, 0.08);
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+       .panel-title h1 {
             font-size: 2.2rem;
             color: #2d3748;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fb7299, #ff85a2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+       .panel-title p {
+            color: #9f7aea;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+       .nav-list {
+            list-style: none;
+            padding: 0 15px;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+       .nav-item {
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
+            border-radius: 16px;
+            position: relative;
         }
 
-       .sub-title {
-            color: #718096;
-            font-size: 1.15rem;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-       .contact-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin-bottom: 25px;
-        }
-
-       .contact-btn {
+       .nav-link {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 16px 24px;
-            border-radius: 16px;
+            gap: 15px;
+            padding: 20px 25px;
+            color: #4a5568;
             text-decoration: none;
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            border-radius: 16px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-       .intro-btn {
-            background: linear-gradient(90deg, #7474bf 0%, #348ac7 100%);
+       .nav-link.active {
+            color: white;
         }
 
-       .intro-btn:hover {
-            background: linear-gradient(90deg, #6262b9 0%, #2d7cb8 100%);
+       .nav-link:hover:not(.active) {
+            background: rgba(251, 114, 153, 0.08);
+            color: #2d3748;
+            transform: translateX(5px);
         }
 
-       .contact-btn::before {
+       .nav-icon {
+            font-size: 1.6rem;
+            width: 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+       .nav-link.active.nav-icon {
+            transform: scale(1.15);
+        }
+
+       .content-container {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            will-change: transform, opacity;
+        }
+
+       .content-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            display: none;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+       .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+       .intro-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .intro-content {
+            font-size: 1.4rem;
+            color: #4a5568;
+            line-height: 2;
+            background: #fef7fb;
+            padding: 50px;
+            border-radius: 28px;
+            border: 1px solid rgba(251, 114, 153, 0.08);
+            width: 100%;
+            max-width: 700px;
+            box-shadow:
+                0 10px 30px rgba(251, 114, 153, 0.05),
+                inset 0 1px 2px rgba(251, 114, 153, 0.05);
+            letter-spacing: 0.6px;
+        }
+
+       .links-container {
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(251, 114, 153, 0.3) transparent;
+        }
+
+       .links-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+       .links-container::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 6px;
+        }
+
+       .links-container::-webkit-scrollbar-thumb {
+            background: rgba(251, 114, 153, 0.3);
+            border-radius: 6px;
+        }
+
+       .links-container::-webkit-scrollbar-thumb:hover {
+            background: #fb7299;
+        }
+
+       .section-title {
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid #fef7fb;
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+       .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 70px;
+            height: 2px;
+            background: linear-gradient(90deg, #fb7299, #ff85a2);
+            border-radius: 1px;
+        }
+
+       .cards-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+       .link-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border: 1px solid rgba(251, 114, 153, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+            will-change: transform, box-shadow;
+        }
+
+       .link-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(251, 114, 153, 0.1), 0 6px 12px rgba(0,0,0,0.04);
+            border-color: rgba(251, 114, 153, 0.15);
+        }
+
+       .link-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: 0;
+            width: 5px;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(180deg, #fb7299, #ff85a2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-       .contact-btn:hover::before {
-            left: 100%;
+       .link-card:hover::before {
+            opacity: 1;
         }
 
-       .bilibili-btn {
-            background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%);
-        }
-
-       .github-btn {
-            background: linear-gradient(90deg, #2d333b 0%, #484f58 100%);
-        }
-
-       .contact-info {
+       .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 16px 24px;
-            border-radius: 16px;
-            background: #f8f9fa;
-            color: #4a5568;
-            font-size: 1.1rem;
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
+            font-size: 2rem;
+            color: white;
             transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+       .link-card:hover.card-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+       .bilibili-icon { background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%); }
+       .github-icon { background: linear-gradient(90deg, #2d333b 0%, #484f58 100%); }
+       .douyin-icon { background: linear-gradient(90deg, #000000 0%, #fe2c55 100%); }
+       .qq-icon { background: #12b7f5; }
+       .email-icon { background: #ea4335; }
+       .friend-icon { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); }
+
+       .card-info {
+            flex: 1;
+        }
+
+       .card-title {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+       .link-card:hover.card-title {
+            color: #fb7299;
+        }
+
+       .card-value {
+            color: #718096;
+            font-size: 1.1rem;
             position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-       .contact-info:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            background: #fff;
-            border-color: rgba(251, 114, 153, 0.2);
+       .link-card:hover.card-value {
+            color: #fb7299;
         }
 
-       .contact-info::after {
+       .card-value.copied::after {
             content: '复制成功 ✔';
             position: absolute;
-            top: 0;
+            top: -35px;
             right: 0;
             background: #4CAF50;
             color: white;
-            font-size: 0.8rem;
-            padding: 4px 8px;
-            border-radius: 0 16px 0 16px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-       .contact-info.copied::after {
-            opacity: 1;
-            visibility: visible;
-        }
-
-       .btn-icon,.info-icon {
-            font-size: 1.4rem;
-        }
-
-       .contact-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-        }
-
-       .bilibili-btn:hover {
-            background: linear-gradient(90deg, #fa5882 0%, #fb889e 100%);
-        }
-
-       .github-btn:hover {
-            background: linear-gradient(90deg, #22272e 0%, #3c4148 100%);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
         }
 
        .music-player {
-            margin: 20px auto 0;
+            position: fixed;
+            right: 100px;
+            bottom: 40px;
+            z-index: 998;
             display: none;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            width: 330px;
-            max-width: 100%;
+        }
+
+       .music-player iframe {
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(251, 114, 153, 0.1);
         }
 
        .music-toggle {
             position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
+            right: 40px;
+            bottom: 40px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: #fb7299;
+            background: linear-gradient(135deg, #fb7299 0%, #ff85a2 100%);
             color: white;
             border: none;
-            font-size: 1.5rem;
+            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(251, 114, 153, 0.3);
+            box-shadow: 0 10px 25px rgba(251, 114, 153, 0.3);
             transition: all 0.3s ease;
             z-index: 999;
+            animation: breathe 3s infinite ease-in-out;
         }
 
-       .music-toggle::after {
-            content: '点我播放随机音乐~';
-            position: absolute;
-            right: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-       .music-toggle:hover::after {
-            opacity: 1;
-            visibility: visible;
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
        .music-toggle:hover {
-            transform: scale(1.1);
-            background: #fa5882;
-        }
-
-       .intro-section {
-            margin-top: 40px;
-            padding: 25px 20px;
-            border-radius: 20px;
-            background: #fef7fb;
-            border: 1px solid rgba(251, 114, 153, 0.1);
-            text-align: left;
-            scroll-margin-top: 20px;
-        }
-
-       .intro-title {
-            font-size: 1.8rem;
-            color: #2d3748;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-       .intro-content {
-            font-size: 1.15rem;
-            color: #4a5568;
-            line-height: 1.8;
-            white-space: pre-line;
+            transform: scale(1.2);
+            box-shadow: 0 15px 30px rgba(251, 114, 153, 0.4);
         }
 
        .image-toggle {
             position: fixed;
-            left: 20px;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
+            left: 40px;
+            bottom: 40px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: #7474bf;
+            background: linear-gradient(135deg, #7474bf 0%, #6262b9 100%);
             color: white;
             border: none;
-            font-size: 1.5rem;
+            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(116, 116, 191, 0.3);
+            box-shadow: 0 10px 25px rgba(116, 116, 191, 0.3);
             transition: all 0.3s ease;
             z-index: 998;
-        }
-
-       .image-toggle::after {
-            content: '点我开自己户籍~';
-            position: absolute;
-            left: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-       .image-toggle:hover::after {
-            opacity: 1;
-            visibility: visible;
+            animation: breathe 3s infinite ease-in-out 0.5s;
         }
 
        .image-toggle:hover {
-            transform: scale(1.1);
-            background: #6262b9;
+            transform: scale(1.2);
+            box-shadow: 0 15px 30px rgba(116, 116, 191, 0.4);
         }
 
        .image-modal {
@@ -303,230 +422,377 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 20px;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
        .image-modal-content {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 28px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
         }
 
        .close-modal {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
+            top: 40px;
+            right: 40px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: #fb7299;
+            background: linear-gradient(135deg, #fb7299 0%, #ff85a2 100%);
             color: white;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 6px 16px rgba(251, 114, 153, 0.3);
         }
 
        .close-modal:hover {
-            background: #fa5882;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #fa5882 0%, #fb7299 100%);
+            transform: scale(1.15) rotate(90deg);
         }
 
-        @media (max-width: 400px) {
-           .main-title {
+        @media (max-width: 768px) {
+           .nest-panel {
+                flex-direction: column;
+                height: 85vh;
+                min-height: 700px;
+                border-radius: 28px;
+            }
+
+           .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(251, 114, 153, 0.08);
+                padding: 30px;
+            }
+
+           .nav-highlight {
+                display: none;
+            }
+
+           .nav-link.active {
+                background: linear-gradient(90deg, #fb7299 0%, #ff85a2 100%);
+            }
+
+           .nav-list {
+                display: flex;
+                overflow-x: auto;
+                gap: 10px;
+                padding: 0;
+                flex: none;
+            }
+
+           .content-section {
+                padding: 30px;
+            }
+
+           .intro-content {
+                padding: 30px;
+                border-radius: 20px;
+                font-size: 1.2rem;
+            }
+
+           .section-title {
                 font-size: 1.8rem;
             }
-           .contact-btn,.contact-info {
-                padding: 14px 20px;
-                font-size: 1rem;
+
+           .link-card {
+                padding: 24px;
+                gap: 20px;
             }
+
+           .card-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.8rem;
+            }
+
            .music-player {
-                width: 100%;
+                right: 90px;
+                bottom: 30px;
             }
+
            .music-player iframe {
-                width: 100%!important;
-                height: 86px!important;
+                width: 300px!important;
+                border-radius: 16px;
             }
-           .music-toggle::after {
-                bottom: 60px;
-                right: 0;
-                transform: translateX(0);
+
+           .music-toggle, .image-toggle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
             }
-           .image-toggle::after {
-                bottom: 60px;
-                left: 0;
-                transform: translateX(0);
+
+           .music-toggle {
+                right: 30px;
+                bottom: 30px;
             }
-           .intro-title {
-                font-size: 1.5rem;
+
+           .image-toggle {
+                left: 30px;
+                bottom: 30px;
             }
+
+           .close-modal {
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
+                top: 30px;
+                right: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+           .panel-title h1 {
+                font-size: 1.8rem;
+            }
+
+           .nav-link {
+                padding: 16px 20px;
+                font-size: 1.1rem;
+            }
+
+           .content-section {
+                padding: 20px;
+            }
+
            .intro-content {
-                font-size: 1rem;
+                padding: 24px;
+                font-size: 1.1rem;
+            }
+
+           .section-title {
+                font-size: 1.6rem;
+            }
+
+           .link-card {
+                padding: 20px;
+                gap: 15px;
+            }
+
+           .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+
+           .music-player iframe {
+                width: 260px!important;
+            }
+
+           .music-toggle, .image-toggle {
+                width: 55px;
+                height: 55px;
+                font-size: 1.7rem;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div class="card">
-    <h1 class="main-title">欢迎来到 新空的小窝</h1>
-    <p class="sub-title">新空awa 的个人主页</p>
-
-    <div class="contact-buttons">
-        <a href="https://space.bilibili.com/454325752" target="_blank" class="contact-btn bilibili-btn">
-            <i class="fab fa-bilibili btn-icon"></i>
-            <span>是新空啊</span>
-        </a>
-
-        <a href="https://github.com/FurryXinkong" target="_blank" class="contact-btn github-btn">
-            <i class="fab fa-github btn-icon"></i>
-            <span>FurryXinkong</span>
-        </a>
-
-        <button class="contact-btn intro-btn" id="introBtn">
-            <i class="fas fa-user-circle btn-icon"></i>
-            <span>个人简介</span>
-        </button>
-
-        <div class="contact-info" data-copy="226355502">
-            <i class="fab fa-qq info-icon" style="color: #12b7f5;"></i>
-            <span>226355502</span>
+<div class="nest-panel">
+    <div class="sidebar">
+        <div class="nav-highlight"></div>
+        <div class="panel-title">
+            <h1>新空的小窝</h1>
+            <p>欢迎大家扩列哦~</p>
         </div>
-
-        <div class="contact-info" data-copy="xinkong@cnfurry.asia">
-            <i class="fas fa-envelope info-icon" style="color: #ea4335;"></i>
-            <span>xinkong@cnfurry.asia</span>
-        </div>
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#intro" class="nav-link active" data-target="intro-section">
+                    <i class="fas fa-user-circle nav-icon"></i>
+                    <span>个人简介</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link" data-target="contact-section">
+                    <i class="fas fa-address-book nav-icon"></i>
+                    <span>联系方式</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#friend" class="nav-link" data-target="friend-section">
+                    <i class="fas fa-link nav-icon"></i>
+                    <span>友情链接</span>
+                </a>
+            </li>
+        </ul>
     </div>
-
-    <div class="music-player" id="musicPlayer"></div>
-
-    <div class="intro-section" id="introSection">
-        <h2 class="intro-title">个人简介</h2>
-        <div class="intro-content">你好哦 咱是新空 来自淮海地区
-            咱喜欢玩 三角洲 CS2 黎明杀机 猛兽派对 APEX 求生之路
-            欢迎大家扩列哦xwx</div>
+    <div class="content-container">
+        <div id="intro-section" class="content-section active">
+            <div class="intro-container">
+                <div class="intro-content">
+                    你好哦 咱是新空 来自淮海地区东<br>
+                    咱喜欢玩 三角洲 CS2 黎明杀机 猛兽派对<br>
+                    <br>
+                    欢迎大家淮海地区找咱一起玩哦<br>
+                    来了咱请你早上喝糁中午吃鸡晚上啃煎饼xwx<br>
+                </div>
+            </div>
+        </div>
+        <div id="contact-section" class="content-section">
+            <div class="links-container">
+                <h2 class="section-title">联系方式</h2>
+                <div class="cards-wrapper">
+                    <a href="https://space.bilibili.com/454325752" target="_blank" class="link-card">
+                        <div class="card-icon bilibili-icon">
+                            <i class="fab fa-bilibili"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">哔哩哔哩</div>
+                            <div class="card-value">是新空啊</div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/FurryXinkong" target="_blank" class="link-card">
+                        <div class="card-icon github-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">GitHub</div>
+                            <div class="card-value">FurryXinkong</div>
+                        </div>
+                    </a>
+                    <a href="https://www.douyin.com/user/MS4wLjABAAAAeb8293wl-2KcD_3IWo83PGfqjhYr6Vp5rLMrplsKE9Q" target="_blank" class="link-card">
+                        <div class="card-icon douyin-icon">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">抖音</div>
+                            <div class="card-value">是新空啊</div>
+                        </div>
+                    </a>
+                    <div class="link-card" data-copy="226355502">
+                        <div class="card-icon qq-icon">
+                            <i class="fab fa-qq"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">QQ</div>
+                            <div class="card-value">226355502</div>
+                        </div>
+                    </div>
+                    <div class="link-card" data-copy="xinkong@cnfurry.asia">
+                        <div class="card-icon email-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">邮箱</div>
+                            <div class="card-value">xinkong@cnfurry.asia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="friend-section" class="content-section">
+            <div class="links-container">
+                <h2 class="section-title">友情链接</h2>
+                <div class="cards-wrapper">
+                    <a href="https://www.baiyan.me" target="_blank" class="link-card">
+                        <div class="card-icon friend-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-title">白颜的网站</div>
+                            <div class="card-value">baiyan.me</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
+<div class="music-player" id="musicPlayer"></div>
 <button class="music-toggle" id="musicToggle">
     <i class="fas fa-music"></i>
 </button>
-
 <button class="image-toggle" id="imageToggle">
     <i class="fas fa-image"></i>
 </button>
-
 <div class="image-modal" id="imageModal">
     <button class="close-modal" id="closeModal">
         <i class="fas fa-times"></i>
     </button>
-    <img src="" alt="随机图片" class="image-modal-content" id="modalImage">
+    <img src="" alt="图片" class="image-modal-content" id="modalImage">
 </div>
-
 <script>
-    const musicIframes = [
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1889841687&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2019279516&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747885251&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=3317243342&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2747802379&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1469011532&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1827600686&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=2712468512&auto=1&height=66"></iframe>',
-        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="https://music.163.com/outchain/player?type=2&id=1981180229&auto=1&height=66"></iframe>'
-    ];
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    const navHighlight = document.querySelector('.nav-highlight');
+    const navItems = document.querySelectorAll('.nav-item');
 
-    const musicPlayer = document.getElementById('musicPlayer');
-    const musicToggle = document.getElementById('musicToggle');
-    const introBtn = document.getElementById('introBtn');
-    const introSection = document.getElementById('introSection');
-    let isPlaying = false;
-    let currentIframe = null;
-
-    function loadRandomPlayer() {
-        if (currentIframe) {
-            musicPlayer.innerHTML = '';
-            currentIframe = null;
-        }
-        const randomIndex = Math.floor(Math.random() * musicIframes.length);
-        currentIframe = musicIframes[randomIndex];
-        musicPlayer.innerHTML = currentIframe;
+    function updateHighlightPosition(activeLink) {
+        const activeItem = activeLink.closest('.nav-item');
+        const rect = activeItem.getBoundingClientRect();
+        const sidebarRect = document.querySelector('.sidebar').getBoundingClientRect();
+        navHighlight.style.top = `${rect.top - sidebarRect.top}px`;
     }
 
-    loadRandomPlayer();
+    updateHighlightPosition(document.querySelector('.nav-link.active'));
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            contentSections.forEach(s => s.classList.remove('active'));
+            link.classList.add('active');
+            document.getElementById(link.getAttribute('data-target')).classList.add('active');
+            updateHighlightPosition(link);
+        });
+    });
+
+    const copyItems = document.querySelectorAll('.link-card[data-copy]');
+    copyItems.forEach(item => {
+        const valueEl = item.querySelector('.card-value');
+        item.addEventListener('click', () => {
+            navigator.clipboard.writeText(item.getAttribute('data-copy')).then(() => {
+                valueEl.classList.add('copied');
+                setTimeout(() => valueEl.classList.remove('copied'), 2000);
+            });
+        });
+    });
+
+    const musicIframes = [
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=1459232593&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=2019279516&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=3317243342&auto=1&height=66"></iframe>',
+        '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=3327519680&auto=1&height=66"></iframe>'
+    ];
+    const musicPlayer = document.getElementById('musicPlayer');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    function loadMusic() {
+        musicPlayer.innerHTML = musicIframes[Math.floor(Math.random() * musicIframes.length)];
+    }
 
     musicToggle.addEventListener('click', () => {
         if (isPlaying) {
             musicPlayer.style.display = 'none';
-            const iframe = musicPlayer.querySelector('iframe');
-            if (iframe) {
-                const src = iframe.src;
-                const parts = src.split('&');
-                const newParts = [];
-                for (const part of parts) {
-                    if (!part.startsWith('auto=')) {
-                        newParts.push(part);
-                    }
-                }
-                newParts.push('auto=0');
-                iframe.src = newParts.join('&');
-            }
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-            musicToggle.setAttribute('data-status', 'paused');
+            musicToggle.innerHTML = '<i class="fas fa-music"></</i>';
         } else {
             musicPlayer.style.display = 'block';
-            loadRandomPlayer();
-            const iframe = musicPlayer.querySelector('iframe');
-            if (iframe) {
-                const src = iframe.src;
-                const parts = src.split('&');
-                const newParts = [];
-                for (const part of parts) {
-                    if (!part.startsWith('auto=')) {
-                        newParts.push(part);
-                    }
-                }
-                newParts.push('auto=1');
-                iframe.src = newParts.join('&');
-            }
-            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-            musicToggle.setAttribute('data-status', 'playing');
+            loadMusic();
+            musicToggle.innerHTML = '<i class="fas fa-pause"></</i>';
         }
         isPlaying =!isPlaying;
-    });
-
-    introBtn.addEventListener('click', () => {
-        introSection.scrollIntoView({
-            behavior:'smooth',
-            block:'start'
-        });
-    });
-
-    const copyElements = document.querySelectorAll('.contact-info[data-copy]');
-    copyElements.forEach(element => {
-        element.addEventListener('click', () => {
-            const copyText = element.getAttribute('data-copy');
-            navigator.clipboard.writeText(copyText).then(() => {
-                element.classList.add('copied');
-                setTimeout(() => {
-                    element.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('复制失败:', err);
-                alert('复制失败，请手动复制！');
-            });
-        });
     });
 
     const imageToggle = document.getElementById('imageToggle');
@@ -535,19 +801,12 @@
     const closeModal = document.getElementById('closeModal');
 
     imageToggle.addEventListener('click', () => {
-        modalImage.src = `https://imgapi.cn/ip.php?t=${new Date().getTime()}`;
+        modalImage.src = `https://imgapi.cn/ip.php`;
         imageModal.style.display = 'flex';
     });
 
-    closeModal.addEventListener('click', () => {
-        imageModal.style.display = 'none';
-    });
-
-    imageModal.addEventListener('click', (e) => {
-        if (e.target === imageModal) {
-            imageModal.style.display = 'none';
-        }
-    });
+    closeModal.addEventListener('click', () => imageModal.style.display = 'none');
+    imageModal.addEventListener('click', (e) => e.target === imageModal && (imageModal.style.display = 'none'));
 </script>
 </body>
 </html>
