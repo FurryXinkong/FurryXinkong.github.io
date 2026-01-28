@@ -158,14 +158,12 @@
             position: relative;
             will-change: transform, opacity;
             overflow-y: auto;
-            /* 核心修改：完全隐藏滚动条 */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
             background: rgba(255, 255, 255, 0.85);
         }
 
-        /* 核心修改：隐藏Chrome/Safari滚动条 */
        .content-container::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
@@ -199,7 +197,6 @@
             width: 100%;
         }
 
-        /* 6个信息卡 一排3个 样式 */
        .info-cards-wrapper {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -524,7 +521,6 @@
             box-shadow: 0 10px 25px rgba(251, 134, 168, 0.45);
         }
 
-        /* 响应式适配 - 平板/手机 */
         @media only screen and (max-width: 768px) {
            .nest-panel {
                 flex-direction: column !important;
@@ -732,7 +728,6 @@
     <div class="content-container">
         <div id="intro-section" class="content-section active">
             <div class="intro-container">
-                <!-- 6个信息卡 一排3个 -->
                 <div class="info-cards-wrapper">
                     <div class="info-card">
                         <div class="info-card-title">年龄</div>
@@ -759,7 +754,6 @@
                         <div class="info-card-value">猛攻区/偷包</div>
                     </div>
                 </div>
-                <!-- 个人简介框 内容更紧凑 -->
                 <div class="intro-card">
                     你好哦 咱是新空 来自淮海地区东
                     咱21年曾开过minecraft生存服务器 到现在也依然在佛系开服哦~
@@ -855,7 +849,6 @@
     <img src="" alt="图片预览" class="image-modal-content" id="modalImage">
 </div>
 <script>
-    // 导航栏高亮切换
     const navLinks = document.querySelectorAll('.nav-link');
     const contentSections = document.querySelectorAll('.content-section');
     const navHighlight = document.querySelector('.nav-highlight');
@@ -870,22 +863,17 @@
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            // 移除所有激活状态
             navLinks.forEach(l => l.classList.remove('active'));
             contentSections.forEach(s => s.classList.remove('active'));
-            // 添加当前激活状态
             link.classList.add('active');
             const targetId = link.getAttribute('data-target');
             document.getElementById(targetId).classList.add('active');
-            // 更新高亮条位置
             updateHighlightPosition(link);
         });
     });
 
-    // 初始化高亮条位置
     updateHighlightPosition(document.querySelector('.nav-link.active'));
 
-    // 邮箱加密显示
     const emailDisplay = document.getElementById('emailDisplay');
     const emailCard = document.getElementById('emailCard');
     const part1 = 'xinkong';
@@ -895,7 +883,6 @@
     emailDisplay.textContent = realEmail;
     emailCard.setAttribute('data-copy', realEmail);
 
-    // 复制功能
     const copyItems = document.querySelectorAll('.link-card[data-copy]');
     copyItems.forEach(item => {
         const valueEl = item.querySelector('.card-value');
@@ -913,7 +900,6 @@
         });
     });
 
-    // 音乐播放功能
     const musicIframes = [
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=1459232593&auto=1&height=66"></iframe>',
         '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="360" height="90" src="https://music.163.com/outchain/player?type=2&id=2690353112&auto=1&height=66"></iframe>',
@@ -941,7 +927,6 @@
         isPlaying = !isPlaying;
     });
 
-    // 图片预览功能
     const imageToggle = document.getElementById('imageToggle');
     const imageModal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
